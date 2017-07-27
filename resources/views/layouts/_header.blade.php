@@ -18,7 +18,7 @@
                   <a id="logout" href="#">
                     <form action="{{ route('logout') }}" method="POST">
                       {{ csrf_field() }}
-                      {{ method_field('DELETE') }}
+                      {{ method_field('GET') }}
                       <button class="btn btn-block btn-danger" type="submit" name="button">退出</button>
                     </form>
                   </a>
