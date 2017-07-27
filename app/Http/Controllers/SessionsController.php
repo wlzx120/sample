@@ -33,7 +33,7 @@ class SessionsController extends Controller
         //提交动作、
         if(Auth::attempt($credentials,$request->has('remember'))){
             session()->flash('success','欢迎回来');
-            return redirect()->route('users.show',[Auth::user()]);
+            return redirect()->intended(route('users.show',[Auth::user()]));
         }else{
             session()->flash('danger','用户名或密码错误');
             return redirect()->back();
