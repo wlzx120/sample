@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use Session;
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -43,6 +43,17 @@ class User extends Model implements AuthenticatableContract,
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
     
+    //监听模型创建前的事件
+    public static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($user) {
+            $user->activation_token = str_random(30);
+            Session::put('test','123456');
+        });
+    }
+
     
     
     
