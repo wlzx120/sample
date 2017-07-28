@@ -134,3 +134,8 @@ input {
   position: relative;
   right: 0;
 }
+
+//密码重置
+.alert-status {
+  @extend .alert-info;
+}
