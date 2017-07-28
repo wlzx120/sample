@@ -38,9 +38,8 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-         //Session::put('_token','');
-        //var_dump(Session::all());exit;
-        return view('users.show', compact('user'));
+        $statuses = $user->statuses()->orderBy('created_at','desc')->paginate(5);
+        return view('users.show', compact('user','statuses'));
     }
     
     //用户注册
@@ -131,5 +130,6 @@ class UsersController extends Controller
         return redirect()->route('users.show', [$user]);
     }
     
+  
     
 }

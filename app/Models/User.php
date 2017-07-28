@@ -53,7 +53,19 @@ class User extends Model implements AuthenticatableContract,
             Session::put('test','123456');
         });
     }
-
+    
+    //用户与微博关联一对多
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+    
+    //首页微博列表
+    public function feed()
+    {
+        return $this->statuses()
+                    ->orderBy('created_at', 'desc');
+    }
     
     
     
